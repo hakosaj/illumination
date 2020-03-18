@@ -5,8 +5,8 @@ import time
 import pygame
 import math
 from pygame.locals import *
-from ball import Ball
 from wall import Wall
+from ray import Ray
 
 
 
@@ -19,9 +19,14 @@ scorefont = pygame.font.SysFont('Comic Sans MS',40)
 gameoverfont = pygame.font.SysFont('Comic Sans MS',40)
 algofont = pygame.font.SysFont('Arial',20)
 
-ball=Ball(10)
 
-wall =Wall(120,[150,150])
+ray1 = Ray(150,150,0)
+ray2 = Ray(150,150,math.pi/2)
+ray3 = Ray(150,150,math.pi)
+ray4 = Ray(150,150,math.pi*3/2)
+rays=[ray1,ray2,ray3,ray4]
+
+wall =Wall(120,[140,140])
 
 
 screen = pygame.display.set_mode((400,400))
@@ -42,9 +47,11 @@ while True:
                 sys.exit()
 
     wall.draw_wall(screen)
-    ball.draw_ball(screen)
-    ball.move_ball(400);
+    for item in rays:
+        item.draw_ray(screen)
+        
 
+        #If collides with collidecirc but not wall.circ: reflect
 
     tickcounter+=1
     pygame.display.flip()
